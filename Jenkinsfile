@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        // Le nom doit correspondre exactement à celui configuré dans "Tools"
+        nodejs 'NodeJS_24-19-0'
+    }
+
     options {
         buildDiscarder(logRotator(numToKeepStr: '15'))
         timeout(time: 30, unit: 'MINUTES')
@@ -16,7 +21,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
-                // Installe les navigateurs Playwright et leurs dépendances Linux sur l'agent
                 sh 'npx playwright install --with-deps'
             }
         }
@@ -30,7 +34,6 @@ pipeline {
 
     post {
         always {
-            // Remplace publishHTML par l'archivage natif d'artefacts (aucune extension requise)
             archiveArtifacts artifacts: 'playwright-report/**, test-results/**', allowEmptyArchive: true
         }
     }
