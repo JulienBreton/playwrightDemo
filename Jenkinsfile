@@ -5,6 +5,10 @@ pipeline {
         nodejs 'NodeJS_24-19-0'
     }
 
+    environment {
+        PLAYWRIGHT_SERVER = 'ws://192.168.1.18:3000/'
+    }
+
     stages {
         stage('Checkout') {
             steps {

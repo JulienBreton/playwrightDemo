@@ -33,8 +33,8 @@ export default defineConfig({
     video: 'retain-on-failure',
 
     connectOptions: {
-      wsEndpoint: process.env.PLAYWRIGHT_SERVER || 'ws://127.0.0.1:3000/',
-    },
+          wsEndpoint: process.env.PLAYWRIGHT_SERVER || 'ws://127.0.0.1:3000/',
+        },
   },
 
   /* Configuration des navigateurs */
