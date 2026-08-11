@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        PLAYWRIGHT_SERVER = 'ws://pc-hote:3000/'
+        PLAYWRIGHT_SERVER = 'ws://192.168.1.18:3000/'
     }
 
     stages {
