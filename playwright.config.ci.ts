@@ -13,7 +13,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   /* Limite le nombre de workers en CI pour ne pas saturer les CPU du serveur Jenkins */
-  workers: process.env.CI ? 2 : undefined,
+  workers: process.env.CI ? 8 : undefined,
 
   /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
   reporter: [
