@@ -6,3 +6,9 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Rapports et résultats de tests
+/allure-results/
+/allure-report/
+/playwright-report/
+/test-results/

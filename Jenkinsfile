@@ -18,7 +18,8 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                // Utilise le script configuré pour la CI
+                sh 'npm run test:ci'
             }
         }
 
