@@ -7,3 +7,5 @@ docker run -d --name playwright-server -p 3000:3000 --ipc=host mcr.microsoft.com
 ```
 - Configurer le Jenkinsfile pour exécuter les tests sur le server Playwright ✅️
 - Lancer le server Playwright via un composer.yml ✅️
+- Configurer le rapport HTML Playwright (lancer `System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")`) ✅️
+- Configurer le rapport Allure ✅️
