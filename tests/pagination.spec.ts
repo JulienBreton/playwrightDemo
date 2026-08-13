@@ -1,26 +1,47 @@
 import { test, expect } from '@playwright/test';
-import { Accueil } from '../pages/accueil';
+import { HomePage } from '../pages/home.page';
 
-test.describe('Gestion de la pagination', () => {
+test.describe('Module de pagination', () => {
+  let homePage: HomePage;
 
-  test('Consulter la deuxième page de résultats pour Hand Tools', async ({ page }) => {
-    const accueil = new Accueil(page);
-    await accueil.goto();
+  test.beforeEach(async ({ page }) => {
+    homePage = new HomePage(page);
+    await homePage.open();
+  });
 
-    // 1. Filtrer par Hand Tools (qui renvoie plus de 9 produits)
-    const resultats = await accueil.filtrerParCategorie('Hand Tools');
+  test('Naviguer vers la page suivante via le bouton "Suivant"', async ({ page }) => {
+    // 1. Récupérer le nom du premier produit sur la page 1
+    const premierProduitPage1 = await homePage.grid.titresProduits.first().innerText();
 
-    // 2. Vérifier qu'on est sur la page 1 par défaut et qu'il y a 9 cartes (taille de page par défaut)
-    await expect(resultats.cartesProduits).toHaveCount(9);
-    await expect(resultats.pageActive).toHaveText('1');
+    // 2. Cliquer sur "Suivant" dans le composant pagination
+    await homePage.pagination.pageSuivante();
 
-    // 3. Cliquer sur le bouton "Suivant"
-    await resultats.passerAPageSuivante();
+    // 3. Vérifier que la page 2 est active
+    await expect(homePage.pagination.pageActive).toHaveText('2');
 
-    // 4. Vérifications sur la page 2
-    await expect(resultats.pageActive).toHaveText('2');
-    // Vérifier qu'il y a bien des cartes affichées sur cette page 2
-    await expect(resultats.cartesProduits.first()).toBeVisible();
+    // 4. Vérifier que les produits ont changé (le 1er produit n'est plus le même)
+    const premierProduitPage2 = await homePage.grid.titresProduits.first().innerText();
+    expect(premierProduitPage2).not.toEqual(premierProduitPage1);
+  });
+
+  test('Naviguer vers la page précédente via le bouton "Précédent"', async ({ page }) => {
+    // Aller sur la page 2 d'abord
+    await homePage.pagination.pageSuivante();
+    await expect(homePage.pagination.pageActive).toHaveText('2');
+
+    // Revenir sur la page 1
+    await homePage.pagination.pagePrecedente();
+
+    // Vérifier que la page 1 est de nouveau active
+    await expect(homePage.pagination.pageActive).toHaveText('1');
+  });
+
+  test('Naviguer directement vers une page spécifique par son numéro', async () => {
+    // Aller directement sur la page 2
+    await homePage.pagination.allerALaPage(2);
+
+    await expect(homePage.pagination.pageActive).toHaveText('2');
+    await expect(homePage.grid.cartesProduits).toHaveCount(9);
   });
 
 });
