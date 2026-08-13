@@ -18,14 +18,14 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Utilise le script configuré pour la CI
-                sh 'npm run test:ci'
+                sh 'npm ci'
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
-                sh 'npm test'
+                // Lance la config CI (qui se connecte au serveur Docker)
+                sh 'npm run test:ci'
             }
         }
     }
