@@ -20,8 +20,7 @@ test.describe('Module de pagination', () => {
     await expect(homePage.pagination.pageActive).toHaveText('2');
 
     // 4. Vérifier que les produits ont changé (le 1er produit n'est plus le même)
-    const premierProduitPage2 = await homePage.grid.titresProduits.first().innerText();
-    expect(premierProduitPage2).not.toEqual(premierProduitPage1);
+    await expect(homePage.grid.titresProduits.first()).not.toHaveText(premierProduitPage1);
   });
 
   test('Naviguer vers la page précédente via le bouton "Précédent"', async ({ page }) => {
