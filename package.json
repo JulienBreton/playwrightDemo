@@ -7,7 +7,9 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:ci": "playwright test --config=playwright.config.ci.ts",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "clean:allure": "rimraf allure-results",
+    "test:e2e": "npm run clean:allure && playwright test"
   },
   "keywords": [],
   "author": "",

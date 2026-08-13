@@ -24,6 +24,8 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
+                sh 'rm -rf allure-results'
+                sh 'npx playwright test'
                 // Lance la config CI (qui se connecte au serveur Docker)
                 sh 'npm run test:ci'
             }
