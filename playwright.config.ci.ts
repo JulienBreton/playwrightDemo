@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 /* Détecte si l'on est en CI (GitHub Actions, etc.) OU spécifiquement sur Jenkins */
 const isCI = !!process.env.CI || !!process.env.JENKINS_URL;
-console.log('Nombre de workers :', isCI ? 8 : 'Défaut');
+console.log('Nombre de workers :', isCI ? 4 : 'Défaut');
 
 export default defineConfig({
   testDir: './tests',
