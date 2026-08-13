@@ -1,19 +1,29 @@
 import { defineConfig, devices } from '@playwright/test';
 
+/* Détecte si l'on est en CI (GitHub Actions, etc.) OU spécifiquement sur Jenkins */
+const isCI = !!process.env.CI || !!process.env.JENKINS_URL;
+
 export default defineConfig({
   testDir: './tests',
 
   /* Exécution en parallèle de tous les tests */
-  fullyParallel: true,
+  //fullyParallel: true,
 
   /* Interdit l'utilisation de 'test.only' sur Jenkins pour ne pas ignorer de tests par erreur */
-  forbidOnly: !!process.env.CI,
+  //forbidOnly: !!process.env.CI,
 
   /* Rejoue 2 fois un test en CI s'il échoue (pour gérer la fragilité réseau/serveur) */
-  retries: process.env.CI ? 2 : 0,
+  //retries: process.env.CI ? 2 : 0,
 
   /* Limite le nombre de workers en CI pour ne pas saturer les CPU du serveur Jenkins */
-  workers: process.env.CI ? 8 : undefined,
+  //workers: process.env.CI ? 8 : undefined,
+
+/* Utilise 8 workers en CI / Jenkins, sinon le comportement par défaut en local */
+  workers: isCI ? 8 : undefined,
+
+  fullyParallel: true,
+  forbidOnly: isCI,
+  retries: isCI ? 2 : 0,
 
   /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
   reporter: [
