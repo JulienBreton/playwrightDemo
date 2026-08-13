@@ -25,6 +25,8 @@ export default defineConfig({
     // 2. Transmet l'option d'ouverture maximisée à Chromium
     launchOptions: {
       args: ['--start-maximized'],
+      // Lit le paramètre SLOWMO passé lors du lancement
+      slowMo: process.env.SLOWMO ? parseInt(process.env.SLOWMO, 10) : 0,      
     },
 
     /* Capture de preuves uniquement en cas d'échec pour optimiser le temps et l'espace disque */
