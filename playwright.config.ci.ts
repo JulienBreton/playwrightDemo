@@ -23,10 +23,13 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://playwright.dev',
+    baseURL: 'https://practicesoftwaretesting.com',
 
     /* Mode headless obligatoire (serveur Jenkins sans interface graphique) */
     headless: true,
+
+    // Indique à Playwright que les balises de test utilisent data-test
+    testIdAttribute: 'data-test',
 
     /* Capture de preuves uniquement en cas d'échec pour optimiser le temps et l'espace disque */
     trace: 'on-first-retry',
@@ -35,6 +38,12 @@ export default defineConfig({
 
     connectOptions: {
       wsEndpoint: process.env.PLAYWRIGHT_SERVER || 'ws://127.0.0.1:3000/',
+    },
+
+    // Define la langue du navigateur et les en-têtes HTTP envoyés au serveur
+    locale: 'fr-FR',
+    extraHTTPHeaders: {
+      'Accept-Language': 'fr-FR,fr;q=0.9',
     },
   },
 
