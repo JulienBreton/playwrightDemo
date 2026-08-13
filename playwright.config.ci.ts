@@ -6,6 +6,15 @@ export default defineConfig({
   /* Exécution en parallèle de tous les tests */
   fullyParallel: true,
 
+  /* Interdit l'utilisation de 'test.only' sur Jenkins pour ne pas ignorer de tests par erreur */
+  forbidOnly: !!process.env.CI,
+
+  /* Rejoue 2 fois un test en CI s'il échoue (pour gérer la fragilité réseau/serveur) */
+  retries: process.env.CI ? 2 : 0,
+
+  /* Limite le nombre de workers en CI pour ne pas saturer les CPU du serveur Jenkins */
+  workers: process.env.CI ? 2 : undefined,
+
   /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
@@ -17,12 +26,16 @@ export default defineConfig({
     baseURL: 'https://playwright.dev',
 
     /* Mode headless obligatoire (serveur Jenkins sans interface graphique) */
-    headless: false,
+    headless: true,
 
     /* Capture de preuves uniquement en cas d'échec pour optimiser le temps et l'espace disque */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+
+    connectOptions: {
+      wsEndpoint: process.env.PLAYWRIGHT_SERVER || 'ws://127.0.0.1:3000/',
+    },
   },
 
   /* Configuration des navigateurs */
