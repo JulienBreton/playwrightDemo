@@ -19,6 +19,14 @@ export default defineConfig({
     /* Mode headless obligatoire (serveur Jenkins sans interface graphique) */
     headless: false,
 
+    // 1. Désactive le viewport fixe de Playwright (1280x720 par défaut)
+    viewport: null,
+
+    // 2. Transmet l'option d'ouverture maximisée à Chromium
+    launchOptions: {
+      args: ['--start-maximized'],
+    },
+
     /* Capture de preuves uniquement en cas d'échec pour optimiser le temps et l'espace disque */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
@@ -29,7 +37,6 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
     },
   ],
 });
