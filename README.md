@@ -11,3 +11,4 @@ docker run -d --name playwright-server -p 3000:3000 --ipc=host mcr.microsoft.com
 - Configurer le rapport Allure ✅️
 - Avoir une config pour le lancement des tests en local et une config pour le lancement en CI ✅️
 - En local, lancer le navigateur en plein écran ✅️
+- Ajout d'un paramètre pour lancer les tests en slowmo `SLOWMO=500 npx playwright test --headed` ✅️
