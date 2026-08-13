@@ -9,3 +9,5 @@ docker run -d --name playwright-server -p 3000:3000 --ipc=host mcr.microsoft.com
 - Lancer le server Playwright via un composer.yml ✅️
 - Configurer le rapport HTML Playwright (lancer `System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")`) ✅️
 - Configurer le rapport Allure ✅️
+- Avoir une config pour le lancement des tests en local et une config pour le lancement en CI ✅️
+- En local, lancer le navigateur en plein écran ✅️
