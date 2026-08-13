@@ -30,8 +30,18 @@ pipeline {
     }
 
     post {
-        always {
-            archiveArtifacts artifacts: 'playwright-report/**, test-results/**', allowEmptyArchive: true
-        }
+            always {
+                // Publie le rapport HTML dans l'interface Jenkins
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Rapport Playwright',
+                    reportTitles: 'Rapport de Test'
+                ])
+            }
     }
 }
+
