@@ -5,11 +5,21 @@ export class HeaderComponent {
   readonly navContact: Locator;
   readonly navCart: Locator;
   readonly navSignIn: Locator;
+  readonly userMenu: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.navContact = page.getByTestId('nav-contact');
     this.navCart = page.getByTestId('nav-cart');
     this.navSignIn = page.getByTestId('nav-sign-in');
+    this.userMenu = page.getByTestId('nav-menu');
+  }
+
+  async goToContact(): Promise<void> {
+    await this.navContact.click();
+  }
+
+  async goToSignIn(): Promise<void> {
+    await this.navSignIn.click();
   }
 }

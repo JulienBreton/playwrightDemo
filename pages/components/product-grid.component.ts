@@ -2,7 +2,7 @@ import { Page, Locator } from '@playwright/test';
 
 export class ProductGridComponent {
   readonly page: Page;
-  readonly nombreResultats : Locator;
+  readonly nombreResultats: Locator;
   readonly cartesProduits: Locator;
   readonly titresProduits: Locator;
   readonly legendeRecherche: Locator
