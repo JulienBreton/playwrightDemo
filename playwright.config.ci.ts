@@ -20,7 +20,7 @@ export default defineConfig({
   //workers: process.env.CI ? 8 : undefined,
 
 /* Utilise 8 workers en CI / Jenkins, sinon le comportement par défaut en local */
-  workers: isCI ? 8 : undefined,
+  workers: isCI ? 4 : undefined,
 
   fullyParallel: true,
   forbidOnly: isCI,
