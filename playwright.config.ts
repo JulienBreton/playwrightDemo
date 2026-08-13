@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  
+
   /* Exécution en parallèle de tous les tests */
   fullyParallel: true,
 
@@ -18,7 +18,8 @@ export default defineConfig({
   /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
-    ['list'] // Affiche les logs en direct dans la console Jenkins
+    ['list'], // Affiche les logs en direct dans la console Jenkins 
+    ['allure-playwright', { outputFolder: 'allure-results' }]
   ],
 
   use: {
@@ -33,8 +34,8 @@ export default defineConfig({
     video: 'retain-on-failure',
 
     connectOptions: {
-          wsEndpoint: process.env.PLAYWRIGHT_SERVER || 'ws://127.0.0.1:3000/',
-        },
+      wsEndpoint: process.env.PLAYWRIGHT_SERVER || 'ws://127.0.0.1:3000/',
+    },
   },
 
   /* Configuration des navigateurs */
