@@ -40,7 +40,7 @@ pipeline {
                     reportFiles: 'index.html',
                     reportName: 'Rapport Playwright',
                     reportTitles: 'Rapport de Test'
-                ]),
+                ])
                 // Génère et publie le rapport Allure dans l'interface Jenkins
                 allure([
                     includeProperties: false,
@@ -50,7 +50,6 @@ pipeline {
                  results: [[path: 'allure-results']]
                 ])
             }
-
     }
 }
 
