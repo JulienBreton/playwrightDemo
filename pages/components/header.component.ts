@@ -6,6 +6,7 @@ export class HeaderComponent {
   readonly navCart: Locator;
   readonly navSignIn: Locator;
   readonly userMenu: Locator;
+  readonly cartBadge: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,6 +14,7 @@ export class HeaderComponent {
     this.navCart = page.getByTestId('nav-cart');
     this.navSignIn = page.getByTestId('nav-sign-in');
     this.userMenu = page.getByTestId('nav-menu');
+    this.cartBadge = page.getByTestId('nav-cart');
   }
 
   async goToContact(): Promise<void> {

@@ -12,6 +12,6 @@ export abstract class BasePage {
 
   // Navigation relative (s'appuie sur la baseURL du playwright.config.ts)
   async navigateTo(path: string = '') {
-    await this.page.goto(`/#/${path}`);
+    await this.page.goto(`/${path}`);
   }
 }
