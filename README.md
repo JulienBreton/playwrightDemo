@@ -14,3 +14,5 @@ docker run -d --name playwright-server -p 3000:3000 --ipc=host mcr.microsoft.com
 - Ajout d'un paramètre pour lancer les tests en slowmo `SLOWMO=500 npx playwright test --headed` ✅️
 - Découpe le projet pour s'adapter à une Single Page Application ✅️
 - Configurer le nombre de workers en CI pour l'exécution des tests en parallèle ✅️
+- Organiser les tests par type d'utilisateurs ⏳
+- Mettre en place la sauvegarde de session avec storageState ⏳
