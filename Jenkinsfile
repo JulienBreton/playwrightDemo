@@ -8,7 +8,7 @@ pipeline {
     environment {
         // Force l'injection de la variable pour Node.js
         CI = 'true'
-        PLAYWRIGHT_SERVER = 'ws://playwright-server:3000/'
+        PLAYWRIGHT_SERVER = 'ws://localhost:3000/'
     }
 
     stages {
