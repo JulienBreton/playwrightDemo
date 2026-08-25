@@ -9,6 +9,7 @@ pipeline {
         // Force l'injection de la variable pour Node.js
         CI = 'true'
         // Pour avoir l'ip de l'hôte qui fait tourner le serveur playwright.
+        // ip addr show docker0 | grep inet
         PLAYWRIGHT_SERVER = 'ws://172.17.0.1:3000/'
     }
 
