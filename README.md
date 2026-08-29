@@ -2,7 +2,7 @@
 - Mettre en place Page Object Model avec Playwright ✅️
 - Lancer le server Playwright ✅️
 - Configurer le Jenkinsfile pour exécuter les tests sur le server Playwright ✅️
-- Lancer le server Playwright via un composer.yml ✅️
+- Lancer le server Playwright via un composer.yml (`docker compose -f docker-compose.yml up -d`) ✅️ 
 - Configurer le rapport HTML Playwright (lancer `System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")`) ✅️
 - Configurer le rapport Allure ✅️
 - Avoir une config pour le lancement des tests en local et une config pour le lancement en CI ✅️

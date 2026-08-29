@@ -45,11 +45,40 @@ export default defineConfig({
     },
   },
 
-  /* Configuration des navigateurs */
-  projects: [
+projects: [
+    // 1. Authentification (s'exécute en premier)
     {
-      name: 'chromium',
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+
+    // 2. Tests Invité (sans authentification)
+    {
+      name: 'guest-tests',
+      testDir: './tests/1-guest',
       use: { ...devices['Desktop Chrome'] },
+    },
+
+    // 3. Tests Client Connecté (injecte la session client)
+    {
+      name: 'customer-tests',
+      testDir: './tests/2-customer',
+      dependencies: ['setup'],
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/customer.json',
+      },
+    },
+
+    // 4. Tests Administrateur (injecte la session admin)
+    {
+      name: 'admin-tests',
+      testDir: './tests/3-admin',
+      dependencies: ['setup'],
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/admin.json',
+      },
     },
   ],
 });
