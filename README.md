@@ -12,7 +12,7 @@
 - Configurer le nombre de workers en CI pour l'exécution des tests en parallèle ✅️
 - Organiser les tests par type d'utilisateurs ✅️
 - Mettre en place la sauvegarde de session avec storageState ✅️
-- Mettre en place des Custom Fixtures pour injecter automatiquement les Page Objects dans les tests sans les instancier manuellement. ⏳️
+- Mettre en place des Custom Fixtures pour injecter automatiquement les Page Objects dans les tests sans les instancier manuellement. ✅️
 - Activer la capture des traces Playwright sur échec (trace: 'retain-on-failure') pour analyser rapidement les retours de CI. ⏳️
 - Configurer la stratégie de rejeu (retries: isCI ? 2 : 0) pour stabiliser les échecs intermittents en CI. ⏳️
 - Utiliser l'API Context pour le Data Setup/Teardown afin de préparer les données de test rapidement sans repasser par l'IHM. ⏳️
