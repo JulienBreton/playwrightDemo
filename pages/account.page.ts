@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './base.page';
 
 export class AccountPage extends BasePage {
@@ -47,4 +47,8 @@ export class AccountPage extends BasePage {
   async allerAuxFavoris(): Promise<void> {
     await this.myFavoritesLink.click();
   }
+
+  async verifyIsLoaded() {
+    await expect(this.page).toHaveURL(/.*\/account/);
+  }      
 }

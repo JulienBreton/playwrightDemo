@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/home.page';
+import { test, expect } from '../../fixtures/page-fixtures';
 
 // Jeu de données de test (Data-driven testing)
 const outilsAChercher = [
@@ -20,9 +19,8 @@ const outilsAChercher = [
 test.describe('Module de recherche de produits', () => {
 
     for (const donnee of outilsAChercher) {
-        test(`Recherche d'outil : ${donnee.recherche}`, async ({ page }) => {
-            const homePage = new HomePage(page);
-
+        test(`Recherche d'outil : ${donnee.recherche}`, async ({ homePage }) => {
+            
             // 1. Accès au site
             await homePage.open();
 

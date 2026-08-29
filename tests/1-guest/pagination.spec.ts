@@ -1,15 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/home.page';
+import { test, expect } from '../../fixtures/page-fixtures';
 
 test.describe('Module de pagination', () => {
-  let homePage: HomePage;
 
-  test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page);
+  test('Naviguer vers la page suivante via le bouton "Suivant"', async ({ homePage }) => {
     await homePage.open();
-  });
 
-  test('Naviguer vers la page suivante via le bouton "Suivant"', async ({ page }) => {
     // 1. Récupérer le nom du premier produit sur la page 1
     const premierProduitPage1 = await homePage.grid.titresProduits.first().innerText();
 
@@ -23,7 +18,9 @@ test.describe('Module de pagination', () => {
     await expect(homePage.grid.titresProduits.first()).not.toHaveText(premierProduitPage1);
   });
 
-  test('Naviguer vers la page précédente via le bouton "Précédent"', async ({ page }) => {
+  test('Naviguer vers la page précédente via le bouton "Précédent"', async ({ homePage }) => {
+    await homePage.open();
+
     // Aller sur la page 2 d'abord
     await homePage.pagination.pageSuivante();
     await expect(homePage.pagination.pageActive).toHaveText('2');
@@ -35,7 +32,9 @@ test.describe('Module de pagination', () => {
     await expect(homePage.pagination.pageActive).toHaveText('1');
   });
 
-  test('Naviguer directement vers une page spécifique par son numéro', async () => {
+  test('Naviguer directement vers une page spécifique par son numéro', async ({ homePage }) => {
+    await homePage.open();
+
     // Aller directement sur la page 2
     await homePage.pagination.allerALaPage(2);
 

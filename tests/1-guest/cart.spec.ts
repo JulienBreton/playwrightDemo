@@ -1,10 +1,8 @@
-import { test, expect } from '@playwright/test';
-import { ProductPage } from '../../pages/product.page';
+import { test, expect } from '../../fixtures/page-fixtures';
 
 test.describe('Gestion du panier', () => {
 
-    test('Ajouter un produit au panier depuis sa fiche', async ({ page, request }) => {
-        const productPage = new ProductPage(page);
+    test('Ajouter un produit au panier depuis sa fiche', async ({ productPage, request }) => {
 
         const response = await request.get('https://api.practicesoftwaretesting.com/products/search?q=Claw%20Hammer');
         const searchResults = await response.json();
@@ -19,8 +17,7 @@ test.describe('Gestion du panier', () => {
         await expect(productPage.header.cartBadge).toHaveText('2');
     });
 
-    test('Vérifier que la quantité maximale autorisée est de 1 pour un produit restreint', async ({ page, request }) => {
-        const productPage = new ProductPage(page);
+    test('Vérifier que la quantité maximale autorisée est de 1 pour un produit restreint', async ({ productPage, request }) => {
 
         const response = await request.get('https://api.practicesoftwaretesting.com/products/search?q=Thor%20Hammer');
         const searchResults = await response.json();

@@ -1,12 +1,8 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/home.page';
-import { ContactPage } from '../../pages/contact.page';
+import { test, expect } from '../../fixtures/page-fixtures';
 
 test.describe('Formulaire de contact', () => {
 
-  test('Envoyer un message de contact depuis la barre de navigation', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const contactPage = new ContactPage(page);
+  test('Envoyer un message de contact depuis la barre de navigation', async ({ homePage, contactPage }) => {
 
     // 1. Accès à la page d'accueil
     await homePage.open();

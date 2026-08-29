@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class AdminDashboardPage {
   readonly page: Page;
@@ -11,5 +11,10 @@ export class AdminDashboardPage {
 
   async open() {
     await this.page.goto('/admin/dashboard');
+  }
+
+  // Encapsulation de la vérification de l'URL
+  async verifyIsLoaded() {
+    await expect(this.page).toHaveURL(/.*\/admin\/dashboard/);
   }
 }

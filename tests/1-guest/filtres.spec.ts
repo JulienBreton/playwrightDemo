@@ -1,5 +1,4 @@
-import { test, expect } from '@playwright/test';
-import { HomePage } from '../../pages/home.page';
+import { test, expect } from '../../fixtures/page-fixtures';
 
 test.describe('Module de filtre des produits', () => {
 
@@ -13,8 +12,7 @@ test.describe('Module de filtre des produits', () => {
     ];
 
     for (const categorie of categoriesATester) {
-        test(`Filtrage par la catégorie "${categorie.nom}"`, async ({ page }) => {
-            const homePage = new HomePage(page);
+        test(`Filtrage par la catégorie "${categorie.nom}"`, async ({ homePage }) => {
 
             await homePage.open();
 
