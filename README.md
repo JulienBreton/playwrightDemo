@@ -1,7 +1,7 @@
 ### Mémos
 
-[Commandes pour lancer les tests](doc/cmd_lancer_tests.md)
-[Le rapport de l'exécution des tests](doc/rapport.md)
+- [Commandes pour lancer les tests](doc/cmd_lancer_tests.md)
+- [Le rapport de l'exécution des tests](doc/rapport.md)
 
 ### Liste des apprentissages
 
