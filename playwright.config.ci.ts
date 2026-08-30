@@ -11,7 +11,7 @@ export default defineConfig({
 
   fullyParallel: true,
   forbidOnly: isCI,
-  retries: isCI ? 2 : 0,
+  retries: isCI ? 0 : 0,
 
   /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
   reporter: [
