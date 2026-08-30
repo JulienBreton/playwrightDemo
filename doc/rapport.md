@@ -22,3 +22,17 @@ En cas d'échec, dans le rapport on voit :
 - La trace (on peut l'ouvrir directement depuis le rapport)
 - La vidéo
 - Les attachments
+
+#### CI
+
+Pour le CI le rapport Allure contient aussi toutes ces informations.
+Il faut le déclarer dans playwright.config.ci.ts
+
+```typescript
+  /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
+  reporter: [
+    ['html', { open: 'never', outputFolder: 'playwright-report' }],
+    ['list'], // Affiche les logs en direct dans la console Jenkins 
+    ['allure-playwright', { outputFolder: 'allure-results' }]
+  ],
+```
