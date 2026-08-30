@@ -15,9 +15,21 @@ npx playwright test tests/1-guest/cart.spec.ts --ui
 ```
 ### Mode --headed
 
+Le mode headed permet de visualiser le test s'exécuter dans le navigateur.
+On peut l'utiliser pour du debug rapide et ponctuel.
+A savoir que par défaut Playwright s'exécute en mode headless.
+
 ```bash
 npx playwright test -g "Ajouter un produit au panier" --headed
 ```
+### Sélectionner les tests à exécuter
+- `npx playwright test -g "Ajouter un produit au panier"` : lancer un test en filtrant sur son nom (g = grep).
+- `npx playwright test` : lancer l'ensemble des tests.
+- `npx playwright test tests/panier.spec.ts` : lancer uniquement les tests d'un fichier précis.
+- `npx playwright test --project=customer-tests` : lancer un "projet" de tests (ils sont déclarés dans le plawright.config.ts)
+- `npx playwright test tests/panier.spec.ts:42` : lancer uniquement le test situé à une ligne précise dans un fichier (pratique pour relancer un seul test rapidement).
+- `npx playwright test tests/panier/` : lancer tous les tests d'un dossier.
+- `npx playwright test --grep @smoke` : lancer les tests par tag (les tags sont ajoutés dans le nom du test, ex. test('ajout au panier @smoke', ...)).
 
 ### Autres commandes
-- codegen sert à générer un test en enregistrant des actions dans le navigateur.
+- L'option `codegen` sert à générer un test en enregistrant des actions dans le navigateur. On peut ensuite se servir de cette base pour concevoir un script pour un test.
