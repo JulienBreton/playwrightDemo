@@ -2,6 +2,7 @@
 
 - [Commandes pour lancer les tests](doc/cmd_lancer_tests.md)
 - [Le rapport de l'exécution des tests](doc/rapport.md)
+- [Astuces](doc/astuces.md)
 
 ### Liste des apprentissages
 
