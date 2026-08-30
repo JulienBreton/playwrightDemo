@@ -1,6 +1,6 @@
 ### Mémos
 
-[Commandes pour lancer les tests](doc/cmd_mancer_tests.md)
+[Commandes pour lancer les tests](doc/cmd_lancer_tests.md)
 
 ### Liste des apprentissages
 
