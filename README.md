@@ -1,3 +1,9 @@
+### Mémos
+
+[Commande pour lancer les tests](doc/cmd_mancer_tests.md)
+
+### Liste des apprentissages
+
 - Créer un projet template pour Playwright ✅️
 - Mettre en place Page Object Model avec Playwright ✅️
 - Lancer le server Playwright ✅️
