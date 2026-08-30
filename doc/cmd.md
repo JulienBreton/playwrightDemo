@@ -22,6 +22,17 @@ A savoir que par défaut Playwright s'exécute en mode headless.
 ```bash
 npx playwright test -g "Ajouter un produit au panier" --headed
 ```
+### Mode --debug
+
+Le mode debug permet d'exécuter un test pas à pas pour analyser un cas d'échec que l'on ne comprend pas.
+Il ouvre le Playwright Inspector (la même fenêtre que celle utilisée par codegen) en plus du navigateur, avec des contrôles pour piloter l'exécution.
+Poser un point d'arrêt : `await page.pause();` (l'exécution s'arrête à cette ligne précise, que l'on soit en mode --debug ou même hors debug).
+On peut aussi mettre un breakpoint classique dans l'éditeur (VS Code) si on exécute les tests via l'extension Playwright, sans forcément utiliser page.pause().
+
+```bash
+npx playwright test tests/1-guest/cart.spec.ts -g "nom du test" --debug
+```
+
 ### Sélectionner les tests à exécuter
 - `npx playwright test -g "Ajouter un produit au panier"` : lancer un test en filtrant sur son nom (g = grep).
 - `npx playwright test` : lancer l'ensemble des tests.
