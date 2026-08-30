@@ -41,6 +41,8 @@ npx playwright test tests/1-guest/cart.spec.ts -g "nom du test" --debug
 - `npx playwright test tests/panier.spec.ts:42` : lancer uniquement le test situé à une ligne précise dans un fichier (pratique pour relancer un seul test rapidement).
 - `npx playwright test tests/panier/` : lancer tous les tests d'un dossier.
 - `npx playwright test --grep @smoke` : lancer les tests par tag (les tags sont ajoutés dans le nom du test, ex. test('ajout au panier @smoke', ...)).
+- Isolation rapide (test.only) : (test.only('mon test', ...)). L'exécuteur ignorera tous les autres tests du fichier. (Attention à ne pas le commiter).
 
 ### Autres commandes
+- `npx playwright show-report` : visualiser le rapport HTML.
 - L'option `codegen` sert à générer un test en enregistrant des actions dans le navigateur. On peut ensuite se servir de cette base pour concevoir un script pour un test.
