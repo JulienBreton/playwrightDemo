@@ -29,8 +29,8 @@ export default defineConfig({
     // Indique à Playwright que les balises de test utilisent data-test
     testIdAttribute: 'data-test',
 
-    /* Capture de preuves uniquement en cas d'échec pour optimiser le temps et l'espace disque */
-    trace: 'on-first-retry',
+    /* Capture de preuves complète dès le premier échec */
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
 

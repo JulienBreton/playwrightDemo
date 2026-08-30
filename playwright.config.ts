@@ -32,8 +32,8 @@ export default defineConfig({
       slowMo: process.env.SLOWMO ? parseInt(process.env.SLOWMO, 10) : 0,      
     },
 
-    /* Capture de preuves uniquement en cas d'échec pour optimiser le temps et l'espace disque */
-    trace: 'on-first-retry',
+    /* Capture de preuves complète dès le premier échec */
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
 
