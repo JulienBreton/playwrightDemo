@@ -1,0 +1,9 @@
+- Un test est une suite d'instructions (test('vérifier le panier', ...)).
+- Un worker est le "moteur" (le processus) qui fait tourner ces instructions. Un même worker va exécuter plusieurs tests les uns après les autres au cours d'une même session d'exécution.
+- storageState : Fichier JSON généré par Playwright qui sauvegarde l'état d'authentification du navigateur (cookies, localStorage et sessionStorage). Il permet de réinjecter une session déjà connectée dans d'autres tests sans repasser par le formulaire de connexion.
+- auth.setup.ts (Projet Setup) : Script de prérequis exécuté avant la suite de tests principale. Son rôle est de réaliser la connexion une seule fois, de sauvegarder le storageState, puis de passer le relais aux autres tests.
+- playwright.config.ts : Fichier central de configuration. Il définit la base URL, les projets, le nombre de workers, les politiques de rejeu (retries), les artefacts (trace, screenshot) et les options du navigateur (viewport, headless).
+- Custom Fixtures (test.extend) : Extension de la fonction test de Playwright permettant d'injecter automatiquement tes classes de Page Objects (POM) dans la signature de tes tests (async ({ homePage, cartPage }) => { ... }) sans instanciation manuelle (new PageObject()).
+- Connecteur Remote / WebSocket (browserType.connect) : Mode d'exécution où le test (client Node.js) envoie ses instructions via un canal WebSocket à un navigateur ou un serveur Playwright distant (ex: un conteneur Docker).
+- Auto-waiting (Attente automatique) : Mécanisme natif où Playwright vérifie automatiquement qu'un élément est présent, visible, stable et cliquable avant d'exécuter une action, évitant d'avoir à placer des sleep ou des pauses manuelles.
+- Web First Assertions (expect(locator)...) : Assertions asynchrones (ex: await expect(page.locator(...)).toBeVisible()) qui réessayent en boucle d'évaluer la condition jusqu'à ce qu'elle soit vraie ou que le timeout soit atteint.
