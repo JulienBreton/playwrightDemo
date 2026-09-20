@@ -2,7 +2,9 @@
 
 - [Commandes pour lancer les tests](doc/cmd_lancer_tests.md)
 - [Le rapport de l'exécution des tests](doc/rapport.md)
+- [Les fixtures Playwright](doc/playwright_fixtures.md)
 - [Astuces](doc/astuces.md)
+- [Définitions](doc/definitions.md)
 
 ### Liste des apprentissages
 
