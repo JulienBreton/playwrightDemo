@@ -1,38 +1,42 @@
 // pages/components/pagination.component.ts
-import { Page, Locator } from '@playwright/test';
+import { expect, type Page, type Locator } from '@playwright/test';
 
 export class PaginationComponent {
   readonly page: Page;
   readonly boutonSuivante: Locator;
   readonly boutonPrecedent: Locator;
   readonly pageActive: Locator;
+  readonly paginationContainer: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.boutonSuivante = page.getByLabel('Next');
     this.boutonPrecedent = page.getByLabel('Previous');
-    this.pageActive = page.locator('.pagination .active');
+    this.paginationContainer = page.locator('.pagination');
+    this.pageActive = this.paginationContainer.locator('.active');
   }
 
   async pageSuivante(): Promise<void> {
-    await Promise.all([
-      this.page.waitForResponse(res => res.url().includes('/products') && res.status() === 200),
-      this.boutonSuivante.click()
-    ]);
+    await this.boutonSuivante.click();
+    await expect(this.pageActive).toBeVisible();
   }
 
   async pagePrecedente(): Promise<void> {
-    await Promise.all([
-      this.page.waitForResponse(res => res.url().includes('/products') && res.status() === 200),
-      this.boutonPrecedent.click()
-    ]);
+    await this.boutonPrecedent.click();
+    await expect(this.pageActive).toBeVisible();
   }
 
   async allerALaPage(pageNumber: number): Promise<void> {
-    const pageItem = this.page.locator('.pagination').getByText(pageNumber.toString(), { exact: true });
-    await Promise.all([
-      this.page.waitForResponse(res => res.url().includes('/products') && res.status() === 200),
-      pageItem.click()
-    ]);
+    // Passer le locator directement dans l'action sans créer de variable intermédiaire
+    await this.paginationContainer
+      .locator(`a:has-text("${pageNumber}"), button:has-text("${pageNumber}")`)
+      .first()
+      .click();
+
+    await expect(this.pageActive).toHaveText(pageNumber.toString());
+  }
+
+  async validerPageActive(pageAttendue: number): Promise<void> {
+    await expect(this.pageActive).toHaveText(pageAttendue.toString());
   }
 }
