@@ -1,5 +1,7 @@
 - Un test est une suite d'instructions (test('vérifier le panier', ...)).
 - Un worker est le "moteur" (le processus) qui fait tourner ces instructions. Un même worker va exécuter plusieurs tests les uns après les autres au cours d'une même session d'exécution.
+- Workers (ex: --workers=4) : Parallélisation sur une seule machine. Un processus Node lance plusieurs instances de navigateurs en parallèle sur le même serveur.
+- Sharding (ex: --shard=1/3) : Distribution sur plusieurs machines/jobs indépendants. Playwright découpe la suite complète de tests en $N$ fragments équilibrés.
 - storageState : Fichier JSON généré par Playwright qui sauvegarde l'état d'authentification du navigateur (cookies, localStorage et sessionStorage). Il permet de réinjecter une session déjà connectée dans d'autres tests sans repasser par le formulaire de connexion.
 - auth.setup.ts (Projet Setup) : Script de prérequis exécuté avant la suite de tests principale. Son rôle est de réaliser la connexion une seule fois, de sauvegarder le storageState, puis de passer le relais aux autres tests.
 - playwright.config.ts : Fichier central de configuration. Il définit la base URL, les projets, le nombre de workers, les politiques de rejeu (retries), les artefacts (trace, screenshot) et les options du navigateur (viewport, headless).
