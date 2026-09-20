@@ -31,3 +31,4 @@
 - Ajouter un linter avec eslint-plugin-playwright pour garantir les bonnes pratiques de dev au sein de l'équipe. ⏳️
 - Sécuriser la gestion des identifiants et des secrets via l'utilisation de variables d'environnement. ⏳️
 - Automatiser la purge des artefacts de build (vidage des dossiers test-results/ et anciens rapports) sur le serveur CI. ⏳️
+- Découvrir les autres fixtures Playwright. ⏳️
