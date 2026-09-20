@@ -27,7 +27,7 @@
 - Configurer la stratégie de rejeu (retries: isCI ? 2 : 0) pour stabiliser les échecs intermittents en CI. ✅️
 - Utiliser l'API Context pour le Data Setup/Teardown afin de préparer les données de test rapidement sans repasser par l'IHM. ⏸️ (Mis de côté)
 - Configurer l'URL de base dynamique (baseURL) pour basculer facilement entre les environnements (Dev, QA, Staging). ✅️
-- Paralléliser les exécutions par Sharding (--shard) dans la CI pour réduire le temps global de passage de la suite de tests. ⏳️
+- Paralléliser les exécutions par Sharding (--shard) dans la CI pour réduire le temps global de passage de la suite de tests. ✅️ (Je reste avec les workers pour l'instant)
 - Ajouter un linter avec eslint-plugin-playwright pour garantir les bonnes pratiques de dev au sein de l'équipe. ⏳️
 - Sécuriser la gestion des identifiants et des secrets via l'utilisation de variables d'environnement. ⏳️
 - Automatiser la purge des artefacts de build (vidage des dossiers test-results/ et anciens rapports) sur le serveur CI. ⏳️
