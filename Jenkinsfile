@@ -14,6 +14,14 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace & Checkout') {
+            steps {
+                // Nettoie l'espace de travail AVANT le checkout pour repartir de zéro
+                cleanWs()
+                checkout scm
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -30,11 +38,12 @@ pipeline {
             steps {
                 sh 'npm run lint'
             }
-        }        
+        }
 
         stage('Run Playwright Tests') {
             steps {
-                sh 'rm -rf allure-results'
+                // Nettoyage ciblé des anciens résultats de tests avant le run
+                sh 'rm -rf test-results playwright-report allure-results'
                 // Lance la config CI (qui se connecte au serveur Docker)
                 sh 'npm run test:ci'
             }
