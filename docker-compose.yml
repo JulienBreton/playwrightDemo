@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
   playwright-server:
-    image: mcr.microsoft.com/playwright:v1.62.1-noble
+    image: mcr.microsoft.com/playwright:v1.63.0-jammy
     container_name: playwright-server
-    command: npx -y playwright-core run-server --port 3000 --host 0.0.0.0
+    command: npx -y playwright-core@1.63.0 run-server --port 3000 --host 0.0.0.0
     ports:
       - "3000:3000"
     ipc: host
