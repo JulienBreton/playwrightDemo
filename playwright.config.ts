@@ -14,7 +14,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://practicesoftwaretesting.com',
+    baseURL: process.env.BASE_URL || 'https://practicesoftwaretesting.com',
 
     /* Mode headless obligatoire (serveur Jenkins sans interface graphique) */
     headless: false,
