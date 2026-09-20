@@ -12,3 +12,6 @@ node_modules/
 /allure-report/
 /playwright-report/
 /test-results/
+
+# Définition de l'env local pour debug
+.env
