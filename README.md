@@ -7,6 +7,7 @@
 - [Définitions](doc/definitions.md)
 - [Gestion des identifiants et des secrets](doc/credentials.md)
 - [Les Promises et async / await](doc/promises.md)
+- [Pourquoi TypeScript pour Playwright](doc/pourquoi_typescript.md)
 
 ### Liste des apprentissages
 
