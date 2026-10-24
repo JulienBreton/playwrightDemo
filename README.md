@@ -28,7 +28,7 @@
 - Mettre en place des Custom Fixtures pour injecter automatiquement les Page Objects dans les tests sans les instancier manuellement. ✅️
 - Activer la capture des traces Playwright sur échec (trace: 'retain-on-failure') pour analyser rapidement les retours de CI. ✅️
 - Configurer la stratégie de rejeu (retries: isCI ? 2 : 0) pour stabiliser les échecs intermittents en CI. ✅️
-- Utiliser l'API Context pour le Data Setup/Teardown afin de préparer les données de test rapidement sans repasser par l'IHM. ⏸️ (Mis de côté)
+- Utiliser l'API Context pour le Data Setup/Teardown afin de préparer les données de test rapidement sans repasser par l'IHM : chaque test crée et nettoie ses propres données, pas de compte partagé entre des tests qui modifient des données. ⏳️
 - Configurer l'URL de base dynamique (baseURL) pour basculer facilement entre les environnements (Dev, QA, Staging). ✅️
 - Paralléliser les exécutions par Sharding (--shard) dans la CI pour réduire le temps global de passage de la suite de tests. ✅️ (Je reste avec les workers pour l'instant)
 - Ajouter un linter avec eslint-plugin-playwright pour garantir les bonnes pratiques de dev au sein de l'équipe.  ✅️ 
@@ -36,3 +36,8 @@
 - Automatiser la purge des artefacts de build (vidage des dossiers test-results/ et anciens rapports) sur le serveur CI.  ✅️ 
 - Découvrir les autres fixtures Playwright. ⏳️
 - Creuser les rapports : rôle du rapport HTML Playwright (debug d'un run) et d'Allure (historique, tendances), enrichir les tests pour Allure (epic, feature, severity, `test.step`), décider du sort de `monocart-reporter` (installé mais non utilisé). ⏳️
+- Créer une couche API dédiée (dossier `api/` avec des clients typés `ProductsApi`, `UsersApi`...) injectée par fixture, au lieu d'appeler `request` directement dans les tests. ⏳️
+- Écrire les conventions du projet : une seule langue de nommage, stratégie de locators, place des assertions, toutes les pages héritent de `BasePage`, pas de locators en double. ⏳️
+- Mettre en place des tags et des suites (`@smoke` à chaque commit, suite complète la nuit). ⏳️
+- Gérer plusieurs environnements (`.env.qa`, `.env.staging`) sélectionnés par une variable `ENV`. ⏳️
+- Durcir les garde-fous : règles ESLint `no-floating-promises` et `no-explicit-any`, alias d'import (`@pages/...`) dans le `tsconfig.json`. ⏳️
