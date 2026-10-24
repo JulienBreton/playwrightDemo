@@ -1,14 +1,10 @@
 ## Pourquoi TypeScript pour Playwright
 
-- Playwright est conçu d'abord pour TypeScript.
-- Le runner officiel (`@playwright/test`) n'existe qu'en TypeScript/JavaScript.
-- Fixtures, parallélisme, retries et rapports sont intégrés, sans plugin à assembler.
-- Le mode UI et l'extension VS Code ne fonctionnent qu'en TypeScript.
-- Les agents IA de Playwright (planner, generator, healer) génèrent du TypeScript.
-- La documentation et les exemples sont d'abord en TypeScript.
-- Le typage strict détecte les erreurs avant l'exécution (aide pour la maintenabilité et la stabilité des tests).
+- Le runner officiel `@playwright/test` (fixtures, projets avec dépendances, `storageState`, parallélisme, retries, sharding, reporters) n'existe qu'en TypeScript/JavaScript. En Python, il faut assembler pytest et plusieurs plugins.
+- Le mode UI (`--ui`) n'existe qu'en TypeScript/JavaScript.
+- L'extension VS Code Playwright (lancer et déboguer d'un clic, Pick locator) ne fonctionne qu'avec le runner TypeScript/JavaScript.
+- Les agents IA de Playwright (planner, generator, healer) ne génèrent et ne réparent que des tests TypeScript/JavaScript.
+- Le typage strict est actif par défaut et bloque le build en cas d'erreur. En Python, il est optionnel et dépend de mypy.
 - Si on renomme ou modifie une méthode, l'éditeur signale aussitôt tous les tests impactés.
-- Les classes et l'héritage permettent d'utiliser le Page Object Model tel quel.
+- `readonly` et `private` sont vérifiés à la compilation. En Python, ce ne sont que des conventions.
 - C'est le même langage que le front-end : les développeurs peuvent contribuer aux tests.
-- Sur Jenkins et le serveur d'exécution, seul Node.js est nécessaire, ce qui simplifie l'installation et la compatibilité.
-- Les nouveautés de Playwright arrivent d'abord en TypeScript.
