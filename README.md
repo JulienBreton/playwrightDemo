@@ -35,3 +35,4 @@
 - Sécuriser la gestion des identifiants et des secrets via l'utilisation de variables d'environnement (`.env` en local à partir de `.env.example`, credentials Jenkins en CI). ✅️
 - Automatiser la purge des artefacts de build (vidage des dossiers test-results/ et anciens rapports) sur le serveur CI.  ✅️ 
 - Découvrir les autres fixtures Playwright. ⏳️
+- Creuser les rapports : rôle du rapport HTML Playwright (debug d'un run) et d'Allure (historique, tendances), enrichir les tests pour Allure (epic, feature, severity, `test.step`), décider du sort de `monocart-reporter` (installé mais non utilisé). ⏳️
