@@ -29,6 +29,6 @@
 - Configurer l'URL de base dynamique (baseURL) pour basculer facilement entre les environnements (Dev, QA, Staging). ✅️
 - Paralléliser les exécutions par Sharding (--shard) dans la CI pour réduire le temps global de passage de la suite de tests. ✅️ (Je reste avec les workers pour l'instant)
 - Ajouter un linter avec eslint-plugin-playwright pour garantir les bonnes pratiques de dev au sein de l'équipe.  ✅️ 
-- Sécuriser la gestion des identifiants et des secrets via l'utilisation de variables d'environnement. ⏳️
+- Sécuriser la gestion des identifiants et des secrets via l'utilisation de variables d'environnement (`.env` en local à partir de `.env.example`, credentials Jenkins en CI). ✅️
 - Automatiser la purge des artefacts de build (vidage des dossiers test-results/ et anciens rapports) sur le serveur CI.  ✅️ 
 - Découvrir les autres fixtures Playwright. ⏳️

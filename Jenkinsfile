@@ -44,8 +44,24 @@ pipeline {
             steps {
                 // Nettoyage ciblé des anciens résultats de tests avant le run
                 sh 'rm -rf test-results playwright-report allure-results'
-                // Lance la config CI (qui se connecte au serveur Docker)
-                sh 'npm run test:ci'
+                // Injecte les identifiants depuis le gestionnaire de credentials Jenkins
+                // (masqués dans les logs). IDs à créer dans Jenkins > Credentials :
+                // type "Username with password".
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'playwright-customer',
+                        usernameVariable: 'CUSTOMER_EMAIL',
+                        passwordVariable: 'CUSTOMER_PASSWORD'
+                    ),
+                    usernamePassword(
+                        credentialsId: 'playwright-admin',
+                        usernameVariable: 'ADMIN_EMAIL',
+                        passwordVariable: 'ADMIN_PASSWORD'
+                    )
+                ]) {
+                    // Lance la config CI (qui se connecte au serveur Docker)
+                    sh 'npm run test:ci'
+                }
             }
         }
     }

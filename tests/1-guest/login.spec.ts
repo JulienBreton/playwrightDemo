@@ -1,12 +1,14 @@
 import { test, expect } from '../../fixtures/page-fixtures';
+import { getCustomerCredentials } from '../../config/env';
 
 test.describe('Module d\'authentification', () => {
   test('Connexion réussie avec des identifiants valides', async ({ homePage, loginPage, accountPage}) => {
     await homePage.open();
     await homePage.header.goToSignIn();
 
-    // Saisie explicite des identifiants
-    await loginPage.login('customer3@practicesoftwaretesting.com', 'pass123');
+    // Identifiants lus depuis les variables d'environnement
+    const { email, password } = getCustomerCredentials();
+    await loginPage.login(email, password);
 
     // Assertions post-connexion
     await accountPage.verifyIsLoaded();
