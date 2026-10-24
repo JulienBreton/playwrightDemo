@@ -122,6 +122,34 @@ function (res) {
 }
 ```
 
+- `res` est le paramètre : son nom est **libre** (`reponse => reponse.status() === 200` fonctionne pareil).
+- La syntaxe `=>` vient de JavaScript. TypeScript **devine le type** du paramètre et signale une faute de frappe (ex : `p.nom` au lieu de `p.name`).
+
+### Fonction anonyme et callback
+
+Une fonction fléchée écrite « à la volée » n'a pas de nom et n'est déclarée nulle part (ni dans une classe, ni ailleurs) :
+c'est une **fonction anonyme**. Quand on la passe à une autre fonction qui l'appellera elle-même, on parle de **callback**.
+
+```ts
+reponse.data.map(p => p.name)
+// .map est la méthode standard des tableaux
+// p => p.name est le callback : .map l'appelle pour chaque produit
+// → ['Claw Hammer', 'Thor Hammer', ...]
+```
+
+Autres exemples dans le projet :
+- `res => res.url().includes('/users/login')` (`login.page.ts`) : Playwright l'appelle pour chaque réponse réseau.
+- `res => this.estReponseProduits(res, '/products') && ...` (`filter-sidebar.component.ts`).
+
+**Quand lui donner un nom ?** Si la même logique sert à plusieurs endroits, on la sort dans une variable ou une méthode de la classe :
+
+```ts
+const nomDuProduit = (p: { name: string }) => p.name;
+reponse.data.map(nomDuProduit);
+```
+
+C'est le cas de `estReponseProduits` dans `filter-sidebar.component.ts` : la vérification « bonne URL + statut 200 » sert au filtre **et** à la recherche, donc elle est devenue une méthode `private` de la classe plutôt que d'être réécrite deux fois.
+
 ### Récapitulatif
 
 | Écriture             | Signification                                     |
@@ -133,6 +161,8 @@ function (res) {
 | `Promise.all([a, b])`| lancer `a` et `b` en parallèle, attendre les deux |
 | `x ?? y`             | `x`, ou `y` si `x` est `null` / `undefined`       |
 | `res => ...`         | fonction fléchée (petite fonction)                |
+| callback             | fonction passée à une autre qui l'appellera       |
+| `tableau.map(f)`     | nouveau tableau avec `f` appliquée à chaque élément |
 
 ### Pour aller plus loin
 
