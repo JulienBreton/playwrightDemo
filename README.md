@@ -6,6 +6,7 @@
 - [Astuces](doc/astuces.md)
 - [Définitions](doc/definitions.md)
 - [Gestion des identifiants et des secrets](doc/credentials.md)
+- [Les Promises et async / await](doc/promises.md)
 
 ### Liste des apprentissages
 
