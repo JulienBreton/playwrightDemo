@@ -1,46 +1,35 @@
 import { test, expect } from '../../fixtures/page-fixtures';
 
 // Jeu de données de test (Data-driven testing)
-const outilsAChercher = [
-    {
-        recherche: 'Hammer',
-        texteLegende: 'Searched for: Hammer',
-        nbAttendus: 6,
-        premierProduit: 'Claw Hammer with Shock Reduction Grip'
-    },
-    {
-        recherche: 'Pliers',
-        texteLegende: 'Searched for: Pliers',
-        nbAttendus: 4,
-        premierProduit: 'Combination Pliers'
-    }
-];
+const outilsAChercher = ['Hammer', 'Pliers'];
 
 test.describe('Module de recherche de produits', () => {
 
-    for (const donnee of outilsAChercher) {
-        test(`Recherche d'outil : ${donnee.recherche}`, async ({ homePage }) => {
-            
+    for (const recherche of outilsAChercher) {
+        test(`Recherche d'outil : ${recherche}`, async ({ homePage }) => {
+
             // 1. Accès au site
             await homePage.open();
 
-            // 2. Interaction avec la barre latérale (Sidebar)
-            await homePage.sidebar.typeQuery(donnee.recherche);
-            await homePage.sidebar.clickSearchButton();
+            // 2. Interaction avec la barre latérale (Sidebar) ; on récupère la réponse de l'API
+            await homePage.sidebar.typeQuery(recherche);
+            const reponse = await homePage.sidebar.clickSearchButton();
 
             // 3. Vérification de la légende / titre de recherche
-            await expect(homePage.grid.legendeRecherche).toHaveText(donnee.texteLegende);
+            await expect(homePage.grid.legendeRecherche).toHaveText(`Searched for: ${recherche}`);
 
-            // 4. Vérification du nombre de cartes retournées
-            await expect(homePage.grid.cartesProduits).toHaveCount(donnee.nbAttendus);
+            // 4. L'API renvoie au moins un résultat
+            expect(reponse.data.length).toBeGreaterThan(0);
 
-            // 5. Vérification dynamique des titres via RegExp
-            const regexRecherche = new RegExp(donnee.recherche, 'i');
-            const attentesRegex = Array(donnee.nbAttendus).fill(regexRecherche);
-            await expect(homePage.grid.titresProduits).toHaveText(attentesRegex);
+            // 5. La grille affiche exactement les produits renvoyés par l'API
+            await expect(homePage.grid.cartesProduits).toHaveCount(reponse.data.length);
+            await expect(homePage.grid.titresProduits).toHaveText(reponse.data.map(p => p.name));
 
-            // 6. Vérification du nom du premier produit
-            await expect(homePage.grid.titresProduits.first()).toContainText(donnee.premierProduit);
+            // 6. Chaque titre affiché contient le terme recherché
+            const regexRecherche = new RegExp(recherche, 'i');
+            await expect(homePage.grid.titresProduits).toHaveText(
+                Array(reponse.data.length).fill(regexRecherche)
+            );
         });
     }
 

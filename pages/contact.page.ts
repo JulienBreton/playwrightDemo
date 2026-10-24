@@ -11,6 +11,13 @@ export class ContactPage extends BasePage {
   readonly submitButton: Locator;
   readonly successAlert: Locator;
 
+  // Messages d'erreur de validation du formulaire
+  readonly erreurPrenom: Locator;
+  readonly erreurNom: Locator;
+  readonly erreurEmail: Locator;
+  readonly erreurSujet: Locator;
+  readonly erreurMessage: Locator;
+
   constructor(page: Page) {
     super(page);
     this.firstNameInput = page.getByTestId('first-name');
@@ -20,6 +27,12 @@ export class ContactPage extends BasePage {
     this.messageTextarea = page.getByTestId('message');
     this.submitButton = page.getByTestId('contact-submit');
     this.successAlert = page.locator('.alert-success');
+
+    this.erreurPrenom = page.getByTestId('first-name-error');
+    this.erreurNom = page.getByTestId('last-name-error');
+    this.erreurEmail = page.getByTestId('email-error');
+    this.erreurSujet = page.getByTestId('subject-error');
+    this.erreurMessage = page.getByTestId('message-error');
   }
 
   async remplirFormulaire(donnees: {
@@ -37,6 +50,13 @@ export class ContactPage extends BasePage {
     await this.subjectSelect.selectOption({ label: donnees.sujet });
     
     await this.messageTextarea.fill(donnees.message);
+  }
+
+  /**
+   * Clique sur "Envoyer" sans attendre d'appel API (cas où la validation bloque l'envoi)
+   */
+  async cliquerEnvoyer(): Promise<void> {
+    await this.submitButton.click();
   }
 
   async envoyerFormulaire(): Promise<void> {

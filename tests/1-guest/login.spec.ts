@@ -15,4 +15,14 @@ test.describe('Module d\'authentification', () => {
     await expect(accountPage.titlePage).toHaveText('Mon compte');
     await expect(accountPage.header.userMenu).toContainText('Bob Smith');
   });
+
+  test('Connexion refusée avec des identifiants invalides', async ({ loginPage, page }) => {
+    await loginPage.open();
+
+    // Compte inexistant : évite de bloquer le vrai compte client après plusieurs échecs
+    await loginPage.remplirEtSoumettre('compte.inexistant@example.com', 'mauvais-mot-de-passe');
+
+    await expect(loginPage.errorMessage).toHaveText('Invalid email or password');
+    await expect(page).toHaveURL(/.*\/auth\/login/);
+  });
 });

@@ -27,4 +27,33 @@ test.describe('Formulaire de contact', () => {
     await expect(contactPage.successAlert).toContainText('Merci pour votre message ! Nous vous contacterons sous peu. ');
   });
 
+  test('Afficher les erreurs de validation quand le formulaire est vide', async ({ contactPage }) => {
+    await contactPage.navigateTo('contact');
+
+    await contactPage.cliquerEnvoyer();
+
+    await expect(contactPage.erreurPrenom).toHaveText('Le prénom est requis');
+    await expect(contactPage.erreurNom).toHaveText('Le nom de famille est requis');
+    await expect(contactPage.erreurEmail).toHaveText("L'email est requis");
+    await expect(contactPage.erreurSujet).toHaveText('Le sujet est requis');
+    await expect(contactPage.erreurMessage).toHaveText('Le message est requis');
+    await expect(contactPage.successAlert).toBeHidden();
+  });
+
+  test('Refuser un email au format invalide', async ({ contactPage }) => {
+    await contactPage.navigateTo('contact');
+
+    await contactPage.remplirFormulaire({
+      prenom: 'Jean',
+      nom: 'Dupont',
+      email: 'pas-un-email',
+      sujet: 'Statut de ma commande',
+      message: 'Bonjour, j\'ai une question concernant ma commande.'
+    });
+    await contactPage.cliquerEnvoyer();
+
+    await expect(contactPage.erreurEmail).toHaveText("Le format de l'email est invalide");
+    await expect(contactPage.successAlert).toBeHidden();
+  });
+
 });

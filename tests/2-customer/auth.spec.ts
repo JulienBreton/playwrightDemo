@@ -1,8 +1,8 @@
 import { test, expect } from '../../fixtures/page-fixtures';
 
-test.describe('Module d\'authentification', () => {
+test.describe('Espace client', () => {
 
-  test('Connexion réussie avec des identifiants valides', async ({ accountPage }) => {
+  test('Accéder à son compte grâce à la session client enregistrée', async ({ accountPage }) => {
 
     await accountPage.open(); // Accès direct à /account, la session est déjà là !
     await expect(accountPage.titlePage).toHaveText('Mon compte');

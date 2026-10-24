@@ -23,16 +23,23 @@ export class LoginPage extends BasePage {
   }
 
   /**
-   * Remplit le formulaire et soumet les identifiants
+   * Remplit le formulaire et le soumet, sans présumer du résultat
+   * (utile pour les cas d'échec de connexion)
    */
-  async login(email: string, password: string): Promise<void> {
+  async remplirEtSoumettre(email: string, password: string): Promise<void> {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
+    await this.submitButton.click();
+  }
 
-    // Attente de la réponse réseau de l'API d'authentification
-    await Promise.all([
-      this.page.waitForResponse(res => res.url().includes('/users/login') && res.status() === 200),
-      this.submitButton.click()
-    ]);
+  /**
+   * Se connecte et attend la réponse réussie de l'API d'authentification
+   */
+  async login(email: string, password: string): Promise<void> {
+    const reponseLogin = this.page.waitForResponse(
+      res => res.url().includes('/users/login') && res.status() === 200
+    );
+    await this.remplirEtSoumettre(email, password);
+    await reponseLogin;
   }
 }
