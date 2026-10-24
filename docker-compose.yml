@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   playwright-server:
     image: mcr.microsoft.com/playwright:v1.63.0-jammy

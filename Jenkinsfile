@@ -22,12 +22,6 @@ pipeline {
             }
         }
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm ci'
@@ -37,6 +31,13 @@ pipeline {
         stage('Lint Code') {
             steps {
                 sh 'npm run lint'
+            }
+        }
+
+        stage('Type Check') {
+            steps {
+                // Vérifie les types TypeScript (tsconfig.json) sans générer de fichiers
+                sh 'npm run typecheck'
             }
         }
 

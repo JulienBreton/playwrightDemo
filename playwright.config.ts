@@ -1,83 +1,28 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
+import baseConfig from './playwright.config.base';
 
-export default defineConfig({
-  testDir: './tests',
+/* Désactive le viewport fixe (1280x720) imposé par devices['Desktop Chrome'] :
+   la page prend alors toute la taille de la fenêtre maximisée. */
+const fullWindow = { viewport: null, deviceScaleFactor: undefined };
 
-  /* Exécution en parallèle de tous les tests */
-  fullyParallel: true,
-
-  /* Configuration du reporter : génère le rapport HTML sans tenter de l'ouvrir à la fin */
-  reporter: [
-    ['html', { open: 'never', outputFolder: 'playwright-report' }],
-    ['list'], // Affiche les logs en direct dans la console Jenkins 
-    ['allure-playwright', { outputFolder: 'allure-results' }]
-  ],
-
+/* Configuration locale : navigateur visible, plein écran, slowmo optionnel */
+export default defineConfig(baseConfig, {
   use: {
-    baseURL: 'https://practicesoftwaretesting.com',
-
-    /* Mode headless obligatoire (serveur Jenkins sans interface graphique) */
     headless: false,
 
-    // Indique à Playwright que les balises de test utilisent data-test
-    testIdAttribute: 'data-test',
-
-    // 1. Désactive le viewport fixe de Playwright (1280x720 par défaut)
-    viewport: null,
-
-    // 2. Transmet l'option d'ouverture maximisée à Chromium
+    // Transmet l'option d'ouverture maximisée à Chromium
     launchOptions: {
       args: ['--start-maximized'],
       // Lit le paramètre SLOWMO passé lors du lancement
-      slowMo: process.env.SLOWMO ? parseInt(process.env.SLOWMO, 10) : 0,      
-    },
-
-    /* Capture de preuves complète dès le premier échec */
-    trace: 'retain-on-failure',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-
-    // Define la langue du navigateur et les en-têtes HTTP envoyés au serveur
-    locale: 'fr-FR',
-    extraHTTPHeaders: {
-      'Accept-Language': 'fr-FR,fr;q=0.9',
+      slowMo: process.env.SLOWMO ? parseInt(process.env.SLOWMO, 10) : 0,
     },
   },
 
-projects: [
-    // 1. Authentification (s'exécute en premier)
-    {
-      name: 'setup',
-      testMatch: /.*\.setup\.ts/,
-    },
-
-    // 2. Tests Invité (sans authentification)
-    {
-      name: 'guest-tests',
-      testDir: './tests/1-guest',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    // 3. Tests Client Connecté (injecte la session client)
-    {
-      name: 'customer-tests',
-      testDir: './tests/2-customer',
-      dependencies: ['setup'],
-      use: {
-        ...devices['Desktop Chrome'],
-        storageState: 'playwright/.auth/customer.json',
-      },
-    },
-
-    // 4. Tests Administrateur (injecte la session admin)
-    {
-      name: 'admin-tests',
-      testDir: './tests/3-admin',
-      dependencies: ['setup'],
-      use: {
-        ...devices['Desktop Chrome'],
-        storageState: 'playwright/.auth/admin.json',
-      },
-    },
+  // Les projets sont fusionnés par nom avec ceux de la config de base
+  projects: [
+    { name: 'setup', use: fullWindow },
+    { name: 'guest-tests', use: fullWindow },
+    { name: 'customer-tests', use: fullWindow },
+    { name: 'admin-tests', use: fullWindow },
   ],
 });
