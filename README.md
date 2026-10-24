@@ -5,6 +5,7 @@
 - [Les fixtures Playwright](doc/playwright_fixtures.md)
 - [Astuces](doc/astuces.md)
 - [Définitions](doc/definitions.md)
+- [Gestion des identifiants et des secrets](doc/credentials.md)
 
 ### Liste des apprentissages
 
